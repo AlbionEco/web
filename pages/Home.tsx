@@ -98,9 +98,13 @@ const Home: React.FC<HomeProps> = ({ addLead }) => {
                   
                   <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
                     {/* @ts-ignore: Stage shadows prop has specific configuration types that may vary by @react-three/drei version */}
-                    <Stage environment="city" intensity={0.5} shadows={{ type: 'contact', opacity: 0.2, blur: 2 }}>
-                      <PlantModel />
-                    </Stage>
+                    <Stage
+  environment="city"
+  intensity={0.5}
+  shadows
+>
+  <PlantModel />
+</Stage>
                   </Float>
 
                   {/* @ts-ignore: OrbitControls props might have type mismatches in some environments */}
