@@ -97,7 +97,8 @@ const Home: React.FC<HomeProps> = ({ addLead }) => {
                   <spotLight position={[10, 15, 10]} angle={0.2} penumbra={1} intensity={1.5} castShadow />
                   
                   <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
-                    <Stage environment="city" intensity={0.5} contactShadow={{ opacity: 0.2, blur: 2 }}>
+                    {/* @ts-ignore: Stage shadows prop has specific configuration types that may vary by @react-three/drei version */}
+                    <Stage environment="city" intensity={0.5} shadows={{ type: 'contact', opacity: 0.2, blur: 2 }}>
                       <PlantModel />
                     </Stage>
                   </Float>
