@@ -6,10 +6,10 @@ import { TECHNOLOGIES } from '../constants';
 
 const About: React.FC = () => {
   // Mocking 44 client logo paths as requested. 
-  // In a real scenario, these would point to the actual "public/Images/clients/..." directory.
+  // In a real scenario, these would point to the actual "public/images/clients/..." directory.
   const clientLogos = Array.from({ length: 44 }, (_, i) => ({
     id: i + 1,
-    url: `public/Images/Esteemed Clients/${i + 1}.png`,
+    url: `public/images/Esteemed-Clients/${i + 1}.png`,
     alt: `Esteemed Client ${i + 1}`
   }));
 
@@ -82,7 +82,7 @@ const About: React.FC = () => {
               </div>
             </div>
             <div className="relative">
-              <img src="public/Images/Albion Images.png" alt="Albion Office" className="rounded-3xl shadow-2xl" />
+              <img src="public/images/Albion Images.png" alt="Albion Office" className="rounded-3xl shadow-2xl" />
               <div className="absolute -bottom-10 -left-10 bg-blue-900 text-white p-10 rounded-3xl hidden md:block shadow-2xl">
                 <div className="text-4xl font-bold mb-1">15+</div>
                 <div className="text-blue-300 text-sm font-bold uppercase tracking-widest">Years of Excellence</div>

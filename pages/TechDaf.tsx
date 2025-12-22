@@ -34,7 +34,7 @@ const TechDaf: React.FC<{ addLead: (l: any) => void }> = ({ addLead }) => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           <div className="lg:col-span-2">
             <div className="rounded-[2.5rem] overflow-hidden shadow-2xl mb-16 border-8 border-slate-50">
-              <img src="public/Images/A-pro DAF/DAF.png" alt="DAF System Rendering" className="w-full h-[500px] object-cover" />
+              <img src="public/images/A-pro-DAF/DAF.png" alt="DAF System Rendering" className="w-full h-[500px] object-cover" />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">

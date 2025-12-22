@@ -8,21 +8,21 @@ const projectList = [
     title: "500 KLD Zero Liquid Discharge (ZLD)",
     client: "Major Textile Hub, Gujarat",
     tech: "MBR + UF + RO",
-    image: "public/Images/X-flocs MBR/MBR.png",
+    image: "public/images/X-flocs-MBR/MBR.png",
     stats: "95% Recovery Rate"
   },
   {
     title: "Advanced STP for Smart City",
     client: "Urban Development, Maharashtra",
     tech: "M-Flocs (AMBBR)",
-    image: "public/Images/M-flocs AMBBR/AMBBR.png",
+    image: "public/images/M-flocs-AMBBR/AMBBR.png",
     stats: "Compact Footprint (-40%)"
   },
   {
     title: "Oily Water Treatment System",
     client: "Oil & Gas Major, Assam",
     tech: "A-PRO DAF + Ceramic MBR",
-    image: "public/Images/A-pro DAF/DAF.png",
+    image: "public/images/A-pro-DAF/DAF.png",
     stats: "Effluent oil < 1 ppm"
   }
 ];

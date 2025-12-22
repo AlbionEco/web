@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
           <div>
             <Link to="/" className="flex items-center group">
             <div className="flex items-center mb-6 bg-white px-8 py-3 rounded-md">
-              <img src="public/Images/Albion_high_-_logo-removebg-preview.png" alt="Albion Ecotech logo" className='w-48 h-16 '/>
+              <img src="public/images/Albion_high_-_logo-removebg-preview.png" alt="Albion Ecotech logo" className='w-48 h-16 '/>
               {/* <div className="bg-blue-600 p-2 rounded mr-3">
                 <Droplets className="text-white w-5 h-5" />
               </div>

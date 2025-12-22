@@ -54,7 +54,7 @@ const [isSearchOpen, setIsSearchOpen] = useState(false);
         <div className="flex justify-between h-20">
           <div className="flex items-center">
             <Link to="/" className="flex items-center group">
-              <img src="public/Images/Albion_high_-_logo-removebg-preview.png" alt="Albion Ecotech logo" className='w-48 h-16'/>
+              <img src="public/images/Albion_high_-_logo-removebg-preview.png" alt="Albion Ecotech logo" className='w-48 h-16'/>
             </Link>
           </div>
 

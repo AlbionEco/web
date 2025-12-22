@@ -35,10 +35,10 @@ const testimonials = [
 
 const Industries: React.FC = () => {
 // Mocking 44 client logo paths as requested. 
-  // In a real scenario, these would point to the actual "public/Images/clients/..." directory.
+  // In a real scenario, these would point to the actual "public/images/clients/..." directory.
   const clientLogos = Array.from({ length: 44 }, (_, i) => ({
     id: i + 1,
-    url: `public/Images/Esteemed Clients/${i + 1}.png`,
+    url: `public/images/Esteemed-Clients/${i + 1}.png`,
     alt: `Esteemed Client ${i + 1}`
   }));
 
