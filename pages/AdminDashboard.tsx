@@ -3,8 +3,7 @@ import React, { useState, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import { 
   Users, FileText, LogOut, Plus, Trash2, 
-  Download, Search, Mail, Phone, Building, 
-  ChevronRight, Calendar, Filter, X, Image as ImageIcon, Upload
+  X, Image as ImageIcon, Upload
 } from 'lucide-react';
 import { Lead, Blog } from '../types';
 
@@ -219,7 +218,13 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ leads, blogs, onAddBlog
                 <div>
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3 block">Article Body</label>
                   <div className="h-96 bg-slate-50 rounded-2xl overflow-hidden border">
-                    <ReactQuill theme="snow" value={newBlog.content} onChange={(content) => setNewBlog({...newBlog, content})} modules={quillModules} className="h-80" />
+                    <ReactQuill 
+                      theme="snow" 
+                      value={newBlog.content} 
+                      onChange={(content: string) => setNewBlog({...newBlog, content})} 
+                      modules={quillModules} 
+                      className="h-80" 
+                    />
                   </div>
                 </div>
                 
