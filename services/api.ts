@@ -1,9 +1,12 @@
 
 import { Lead, Blog } from '../types';
 
-// REPLACE THIS with your deployed backend URL (e.g., https://albion-api.render.com)
-// During local development, use: http://localhost:5000/api
-const API_BASE_URL = 'http://localhost:5000/api';
+/**
+ * Using a relative URL for production on Vercel.
+ * In local development, Vite will proxy these requests or you can
+ * keep the absolute URL for testing if needed.
+ */
+const API_BASE_URL = '/api';
 
 export const apiService = {
   // LEADS API
@@ -16,7 +19,7 @@ export const apiService = {
       });
       if (!response.ok) throw new Error('Failed to save lead');
       const data = await response.json();
-      return { ...data, id: data._id }; // Map _id to id
+      return { ...data, id: data._id };
     } catch (error) {
       console.error('API Error (saveLead):', error);
       return { 
@@ -33,7 +36,6 @@ export const apiService = {
       const response = await fetch(`${API_BASE_URL}/blogs`);
       if (!response.ok) throw new Error('Failed to fetch blogs');
       const data = await response.json();
-      // Map MongoDB _id to frontend id
       return data.map((blog: any) => ({
         ...blog,
         id: blog._id
@@ -49,7 +51,7 @@ export const apiService = {
       const response = await fetch(`${API_BASE_URL}/blogs/${id}`);
       if (!response.ok) throw new Error('Blog not found');
       const data = await response.json();
-      return { ...data, id: data._id }; // Map _id to id
+      return { ...data, id: data._id };
     } catch (error) {
       console.error('API Error (getBlogById):', error);
       return null;
@@ -65,7 +67,7 @@ export const apiService = {
       });
       if (!response.ok) throw new Error('Failed to save blog');
       const data = await response.json();
-      return { ...data, id: data._id }; // Map _id to id
+      return { ...data, id: data._id };
     } catch (error) {
       console.error('API Error (saveBlog):', error);
       throw error;
