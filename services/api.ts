@@ -3,13 +3,27 @@ import { Lead, Blog } from '../types';
 
 /**
  * Using a relative URL for production on Vercel.
- * In local development, Vite will proxy these requests or you can
- * keep the absolute URL for testing if needed.
+ * In local development, Vite will proxy these requests.
  */
 const API_BASE_URL = '/api';
 
 export const apiService = {
   // LEADS API
+  async getLeads(): Promise<Lead[]> {
+    try {
+      const response = await fetch(`${API_BASE_URL}/leads`);
+      if (!response.ok) throw new Error('Failed to fetch leads');
+      const data = await response.json();
+      return data.map((lead: any) => ({
+        ...lead,
+        id: lead._id
+      }));
+    } catch (error) {
+      console.error('API Error (getLeads):', error);
+      return [];
+    }
+  },
+
   async saveLead(lead: Omit<Lead, 'id' | 'timestamp'>): Promise<Lead> {
     try {
       const response = await fetch(`${API_BASE_URL}/leads`, {

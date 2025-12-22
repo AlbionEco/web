@@ -33,7 +33,7 @@ const TechAmbbr: React.FC<{ addLead: (l: any) => void }> = ({ addLead }) => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           <div className="lg:col-span-2">
             <div className="rounded-3xl overflow-hidden mb-16 shadow-2xl">
-              <img src="Images/M-flocs AMBBR/AMBBR.png" alt="AMBBR Carriers" className="w-full h-[450px] object-cover" />
+              <img src="public/Images/M-flocs AMBBR/AMBBR.png" alt="AMBBR Carriers" className="w-full h-[450px] object-cover" />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">

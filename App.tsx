@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -23,16 +23,15 @@ const App: React.FC = () => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('albion_auth') === 'true');
 
-  // Load data from API
   const refreshData = async () => {
-    const blogData = await apiService.getBlogs();
+    // Both now use the apiService which handles relative /api paths
+    const [blogData, leadData] = await Promise.all([
+      apiService.getBlogs(),
+      apiService.getLeads()
+    ]);
+    
     setBlogs(blogData);
-    // Note: You might want a getLeads method in apiService for the admin panel
-    const response = await fetch('http://localhost:5000/api/leads');
-    if (response.ok) {
-      const leadData = await response.json();
-      setLeads(leadData);
-    }
+    setLeads(leadData);
   };
 
   useEffect(() => {
@@ -50,7 +49,7 @@ const App: React.FC = () => {
       alert("Blog published successfully!");
       refreshData();
     } catch (error) {
-      alert("Failed to publish blog. Is the backend running?");
+      alert("Failed to publish blog. Check your connection or login status.");
     }
   };
 
@@ -71,7 +70,6 @@ const App: React.FC = () => {
             <Route path="/contact" element={<Contact addLead={handleAddLead} />} />
             <Route path="/downloads" element={<Downloads addLead={handleAddLead} />} />
             
-            {/* Admin Routes */}
             <Route 
               path="/control-center" 
               element={

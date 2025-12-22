@@ -37,7 +37,7 @@ const TechMbr: React.FC<{ addLead: (l: any) => void }> = ({ addLead }) => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           <div className="lg:col-span-2">
             <div className="rounded-[2.5rem] overflow-hidden shadow-2xl mb-16 border-8 border-slate-50">
-              <img src="Images/X-flocs MBR/MBR.png" alt="MBR System" className="w-full h-[500px] object-cover" />
+              <img src="public/Images/X-flocs MBR/MBR.png" alt="MBR System" className="w-full h-[500px] object-cover" />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">

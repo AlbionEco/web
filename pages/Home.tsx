@@ -294,7 +294,7 @@ const Home: React.FC<HomeProps> = ({ addLead, blogs }) => {
           <div className="flex flex-col lg:flex-row items-center gap-16">
             <div className="lg:w-1/2">
               <img 
-                src="Images/Packaged STP & ETP.png" 
+                src="public/Images/Packaged STP & ETP.png" 
                 alt="Packaged STP Plant" 
                 className="rounded-3xl shadow-2xl border-8 border-white"
               />
@@ -461,7 +461,7 @@ const Home: React.FC<HomeProps> = ({ addLead, blogs }) => {
               <div 
                 className="absolute inset-0 w-full h-full bg-cover bg-center opacity-40 mix-blend-multiply"
                 style={{ 
-                  backgroundImage: `url('Images/GlobalMapImage.avif')`,
+                  backgroundImage: `url('public/Images/GlobalMapImage.avif')`,
                   filter: 'grayscale(100%) brightness(1.1)'
                 }}
               ></div>

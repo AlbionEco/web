@@ -38,9 +38,22 @@ const BlogSchema = new mongoose.Schema({
 const Lead = mongoose.model('Lead', LeadSchema);
 const Blog = mongoose.model('Blog', BlogSchema);
 
-// API ROUTES
+// Connection helper for Serverless
+const connectDB = async () => {
+  if (mongoose.connection.readyState >= 1) return;
+  
+  if (!MONGODB_URI) {
+    console.error('MONGODB_URI is missing from Environment Variables');
+    return;
+  }
+
+  return mongoose.connect(MONGODB_URI);
+};
+
+// API ROUTES with DB connection check
 app.post('/api/leads', async (req, res) => {
   try {
+    await connectDB();
     const newLead = new Lead(req.body);
     const savedLead = await newLead.save();
     res.status(201).json(savedLead);
@@ -51,6 +64,7 @@ app.post('/api/leads', async (req, res) => {
 
 app.get('/api/leads', async (req, res) => {
   try {
+    await connectDB();
     const leads = await Lead.find().sort({ timestamp: -1 });
     res.json(leads);
   } catch (err) {
@@ -60,6 +74,7 @@ app.get('/api/leads', async (req, res) => {
 
 app.get('/api/blogs', async (req, res) => {
   try {
+    await connectDB();
     const blogs = await Blog.find().sort({ _id: -1 });
     res.json(blogs);
   } catch (err) {
@@ -69,6 +84,7 @@ app.get('/api/blogs', async (req, res) => {
 
 app.get('/api/blogs/:id', async (req, res) => {
   try {
+    await connectDB();
     const blog = await Blog.findById(req.params.id);
     if (!blog) return res.status(404).json({ message: 'Article not found' });
     res.json(blog);
@@ -79,6 +95,7 @@ app.get('/api/blogs/:id', async (req, res) => {
 
 app.post('/api/blogs', async (req, res) => {
   try {
+    await connectDB();
     const newBlog = new Blog(req.body);
     const savedBlog = await newBlog.save();
     res.status(201).json(savedBlog);
@@ -87,21 +104,12 @@ app.post('/api/blogs', async (req, res) => {
   }
 });
 
-// SERVER INITIALIZATION
-// Only connect and listen if we are not in a Vercel/serverless environment
-if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
-  mongoose.connect(MONGODB_URI)
-    .then(() => {
-      console.log('✓ Connected to MongoDB');
-      if (require.main === module) {
-        app.listen(PORT, () => console.log(`✓ Server running on http://localhost:${PORT}`));
-      }
-    })
-    .catch(err => console.error('CRITICAL ERROR: Connection Failed', err));
-} else {
-  // In Vercel, we just need to connect once
-  mongoose.connect(MONGODB_URI);
+// SERVER INITIALIZATION (Local only)
+if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+  connectDB().then(() => {
+    app.listen(PORT, () => console.log(`✓ Local server running on http://localhost:${PORT}`));
+  });
 }
 
-// Export the app for Vercel's serverless handler
+// Export for Vercel
 module.exports = app;
