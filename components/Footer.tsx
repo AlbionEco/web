@@ -10,12 +10,15 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Company Bio */}
           <div>
-            <div className="flex items-center mb-6">
-              <div className="bg-blue-600 p-2 rounded mr-3">
+            <Link to="/" className="flex items-center group">
+            <div className="flex items-center mb-6 bg-white px-8 py-3 rounded-md">
+              <img src="Images/Albion_high_-_logo-removebg-preview.png" alt="Albion Ecotech logo" className='w-48 h-16 '/>
+              {/* <div className="bg-blue-600 p-2 rounded mr-3">
                 <Droplets className="text-white w-5 h-5" />
               </div>
-              <span className="text-xl font-bold text-white tracking-tight">ALBION ECOTECH</span>
+              <span className="text-xl font-bold text-white tracking-tight">ALBION ECOTECH</span> */}
             </div>
+            </Link>
             <p className="text-slate-400 leading-relaxed mb-6">
               Engineered-for-performance solutions in wastewater treatment, industrial water recycling, and environmental engineering. Helping industries achieve zero liquid discharge (ZLD) goals.
             </p>

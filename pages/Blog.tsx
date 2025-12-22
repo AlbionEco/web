@@ -9,6 +9,13 @@ interface BlogProps {
 }
 
 const Blog: React.FC<BlogProps> = ({ blogs }) => {
+  // Helper to strip HTML tags for the preview text
+  const stripHtml = (html: string) => {
+    const tmp = document.createElement("DIV");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen">
       <section className="bg-blue-900 py-24 text-white">
@@ -59,7 +66,7 @@ const Blog: React.FC<BlogProps> = ({ blogs }) => {
                       {blog.title}
                     </h3>
                     <p className="text-slate-600 mb-8 line-clamp-3 leading-relaxed flex-grow">
-                      {blog.content}
+                      {stripHtml(blog.content)}
                     </p>
                     <div className="flex items-center text-blue-600 font-black text-xs uppercase tracking-widest">
                       Read Full Article <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />

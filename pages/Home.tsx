@@ -1,15 +1,16 @@
 
-import React, { Suspense } from 'react';
+import React, { Suspense, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, ArrowRight, Shield, Zap, Recycle, BarChart3, Users, Building2, Globe2, Loader2 } from 'lucide-react';
+import { ChevronRight, ArrowRight, Shield, Zap, Recycle, BarChart3, Users, Building2, Globe2, Loader2 , MapPin, Quote, Star, Calendar, ArrowUpRight } from 'lucide-react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stage, useGLTF, PerspectiveCamera, Environment, ContactShadows, Float } from '@react-three/drei';
 import { TECHNOLOGIES, INDUSTRIES } from '../constants';
+import { Blog } from '../types';
 
 // 3D Model Component
 const PlantModel = () => {
   // Loading the specific GLB file from the root directory
-  const { scene } = useGLTF('PackagedPlant2.glb');
+  const { scene } = useGLTF('/PackagedPlant2.glb');
   // Scale adjusted to 0.6 (60% of original size)
   // @ts-ignore: primitive is a valid React Three Fiber intrinsic element
   return <primitive object={scene} scale={0.6} />;
@@ -23,11 +24,97 @@ const SceneLoader = () => (
   </div>
 );
 
+// Animated Counter Component
+const CountUp = ({ end, duration = 2000, suffix = "" }: { end: number, duration?: number, suffix?: string }) => {
+  const [count, setCount] = React.useState(0);
+  const elementRef = React.useRef<HTMLSpanElement>(null);
+
+  React.useEffect(() => {
+    let animationFrame: number;
+    let startTime: number | null = null;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          const startAnimation = (timestamp: number) => {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            setCount(Math.floor(progress * end));
+            if (progress < 1) {
+              animationFrame = requestAnimationFrame(startAnimation);
+            }
+          };
+          animationFrame = requestAnimationFrame(startAnimation);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => {
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+      observer.disconnect();
+    };
+  }, [end, duration]);
+
+  return <span ref={elementRef}>{count}{suffix}</span>;
+};
+
+
+
 interface HomeProps {
   addLead: (lead: any) => void;
+   blogs: Blog[];
 }
 
-const Home: React.FC<HomeProps> = ({ addLead }) => {
+const Home: React.FC<HomeProps> = ({ addLead, blogs }) => {
+  const [hoveredLocation, setHoveredLocation] = useState<string | null>(null);
+
+// Sorting blogs by date descending to ensure the latest is first
+  const latestBlogs = useMemo(() => {
+    return [...blogs]
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 3);
+  }, [blogs]);
+
+
+  const globalPresence = [
+    { country: "India", city: "Surat, Gujarat", x: "69%", y: "55%" },
+    { country: "USA", city: "Delaware", x: "18%", y: "43%" },
+    { country: "Dubai", city: "UAE", x: "64%", y: "54%" },
+    { country: "China", city: "Shanghai", x: "74%", y: "45%" },
+    { country: "Russia", city: "Moscow", x: "72%", y: "20%" },
+    { country: "Thailand", city: "Bangkok", x: "76%", y: "58%" },
+    { country: "Philippines", city: "Manila", x: "83%", y: "59%" },
+    { country: "Kenya", city: "Nairobi", x: "61%", y: "69%" }
+  ];
+
+  const testimonials = [
+    {
+      quote: "Albion's ZLD system reduced our freshwater intake by 90%. Their engineering precision is truly world-class.",
+      author: "Director of Operations",
+      company: "Leading Textile Conglomerate",
+      industry: "Textiles"
+    },
+    {
+      quote: "The modularity of the X-Flocs MBR allowed us to upgrade our capacity without expanding our land footprint. Highly recommended.",
+      author: "VP Infrastructure",
+      company: "Pharma Innovation Lab",
+      industry: "Pharmaceutical"
+    },
+    {
+      quote: "Reliable, automated, and efficient. The remote monitoring features have simplified our utility management significantly.",
+      author: "Head of Facilities",
+      company: "Global Automotive OEM",
+      industry: "Automobile"
+    }
+  ];
+
+
   return (
     <div className="overflow-hidden">
       {/* 3D Interactive Hero Section */}
@@ -45,7 +132,7 @@ const Home: React.FC<HomeProps> = ({ addLead }) => {
             {/* Left Content - Typography & CTA */}
             <div className="lg:w-[45%] text-left pt-20 lg:pt-0">
               <div className="inline-flex items-center bg-blue-500/10 text-blue-400 px-4 py-2 rounded-2xl text-[10px] font-black tracking-widest uppercase mb-8 border border-blue-500/20 backdrop-blur-xl">
-                <Zap className="w-3.5 h-3.5 mr-2" /> Engineering Excellence Since 2012
+                <Zap className="w-3.5 h-3.5 mr-2" /> Engineering Excellence Since 2010
               </div>
               
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-[1.05] heading-font">
@@ -72,11 +159,6 @@ const Home: React.FC<HomeProps> = ({ addLead }) => {
                 <div className="flex flex-col">
                   <span className="text-2xl font-bold text-white">500+</span>
                   <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Global Sites</span>
-                </div>
-                <div className="w-px h-10 bg-white/10"></div>
-                <div className="flex flex-col">
-                  <span className="text-2xl font-bold text-white">ZLD</span>
-                  <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Compliant</span>
                 </div>
                 <div className="w-px h-10 bg-white/10"></div>
                 <div className="flex flex-col">
@@ -138,24 +220,32 @@ const Home: React.FC<HomeProps> = ({ addLead }) => {
         </div>
       </section>
 
-      {/* Trust Stats */}
+       {/* Trust Stats */}
       <section className="py-12 bg-blue-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center border-r border-blue-800 last:border-0">
-              <div className="text-4xl font-bold mb-1">500+</div>
+              <div className="text-4xl font-bold mb-1">
+                <CountUp end={500} suffix="+" />
+              </div>
               <div className="text-blue-300 text-sm font-medium uppercase tracking-wider">Projects Completed</div>
             </div>
             <div className="text-center border-r border-blue-800 last:border-0">
-              <div className="text-4xl font-bold mb-1">15+</div>
+              <div className="text-4xl font-bold mb-1">
+                <CountUp end={8} suffix="+" />
+              </div>
               <div className="text-blue-300 text-sm font-medium uppercase tracking-wider">Countries Served</div>
             </div>
             <div className="text-center border-r border-blue-800 last:border-0">
-              <div className="text-4xl font-bold mb-1">200k</div>
+              <div className="text-4xl font-bold mb-1">
+                <CountUp end={200} suffix="k" />
+              </div>
               <div className="text-blue-300 text-sm font-medium uppercase tracking-wider">m³/day Treated</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold mb-1">10+</div>
+              <div className="text-4xl font-bold mb-1">
+                <CountUp end={8} suffix="+" />
+              </div>
               <div className="text-blue-300 text-sm font-medium uppercase tracking-wider">Global Patents</div>
             </div>
           </div>
@@ -204,10 +294,13 @@ const Home: React.FC<HomeProps> = ({ addLead }) => {
           <div className="flex flex-col lg:flex-row items-center gap-16">
             <div className="lg:w-1/2">
               <img 
-                src="https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?auto=format&fit=crop&q=80&w=1200" 
+                src="Images/Packaged STP & ETP.png" 
                 alt="Packaged STP Plant" 
                 className="rounded-3xl shadow-2xl border-8 border-white"
               />
+              <div className="absolute -bottom-5 -left-10 bg-blue-900 text-white py-5 px-10 rounded-2xl hidden md:block shadow-2xl">
+                <div className="text-2xl font-bold mb-1">  Plug & Play  </div>
+              </div>
             </div>
             <div className="lg:w-1/2">
               <h2 className="text-sm font-bold text-blue-600 tracking-widest uppercase mb-3">Modular Systems</h2>
@@ -262,6 +355,78 @@ const Home: React.FC<HomeProps> = ({ addLead }) => {
         </div>
       </section>
 
+      {/* Client Testimonials */}
+      <section className="py-16 bg-slate">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-sm font-bold text-blue-600 tracking-widest uppercase mb-2">Performance Reviews</h2>
+            <h3 className="text-3xl lg:text-4xl font-bold text-slate-900 heading-font">Trusted by Industry Leaders</h3>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((t, idx) => (
+              <div key={idx} className="bg-white p-8 rounded-[2rem] border border-slate-100 flex flex-col justify-between hover:shadow-xl transition-all group">
+                <div>
+                  <div className="flex text-blue-500 mb-6 space-x-1">
+                    {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
+                  </div>
+                  <Quote className="w-10 h-10 text-blue-100 mb-4 group-hover:text-blue-200 transition-colors" />
+                  <p className="text-slate-700 italic leading-relaxed mb-8">"{t.quote}"</p>
+                </div>
+                <div>
+                  <div className="w-10 h-1 bg-blue-600 mb-4"></div>
+                  <div className="font-bold text-slate-900">{t.author}</div>
+                  <div className="text-xs text-blue-600 font-bold uppercase tracking-widest mt-1">{t.company}</div>
+                  <div className="text-[10px] text-slate-400 font-medium uppercase mt-1">{t.industry} Sector</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+{/* Latest Dynamic Blogs Section */}
+      <section className="py-16 bg-white border-t border-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div className="text-left">
+              <h2 className="text-sm font-bold text-blue-600 tracking-widest uppercase mb-2">Knowledge Base</h2>
+              <h3 className="text-3xl lg:text-4xl font-bold text-slate-900 heading-font">Latest Industry Insights</h3>
+            </div>
+            <Link to="/blog" className="group flex items-center text-slate-500 hover:text-blue-600 transition-colors font-bold text-sm uppercase tracking-widest">
+              Explore All Articles <ArrowUpRight className="ml-2 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            </Link>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {latestBlogs.map((blog) => (
+              <Link key={blog.id} to={`/blog/${blog.id}`} className="group block bg-white border border-slate-100 rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-300">
+                <div className="h-56 relative overflow-hidden">
+                  <img src={blog.image} alt={blog.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors"></div>
+                </div>
+                <div className="p-8">
+                  <div className="flex items-center text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">
+                    <Calendar className="w-3.5 h-3.5 mr-2 text-blue-500" /> {blog.date}
+                  </div>
+                  <h4 className="text-xl font-bold text-slate-900 mb-4 line-clamp-2 leading-snug group-hover:text-blue-600 transition-colors min-h-[3.5rem]">
+                    {blog.title}
+                  </h4>
+                  <div className="w-10 h-1 bg-slate-100 group-hover:w-20 group-hover:bg-blue-600 transition-all duration-300"></div>
+                </div>
+              </Link>
+            ))}
+            {latestBlogs.length === 0 && (
+              <div className="col-span-full py-20 text-center bg-slate-50 rounded-3xl border border-dashed border-slate-200">
+                <p className="text-slate-400 font-bold uppercase tracking-widest">New updates coming soon</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+
+
       {/* CTA Section */}
       <section className="py-24 bg-blue-900 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -279,7 +444,78 @@ const Home: React.FC<HomeProps> = ({ addLead }) => {
           </Link>
         </div>
       </section>
-    </div>
+   
+
+{/* Interactive Global Map Section */}
+      <section className="py-12 lg:py-20 bg-slate-50 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-sm font-bold text-blue-600 tracking-widest uppercase mb-2">Our Global Footprint</h2>
+            <h3 className="text-3xl lg:text-4xl font-bold text-slate-900 heading-font">Engineering Beyond Borders</h3>
+          </div>
+          
+          <div className="relative bg-white rounded-3xl md:rounded-[3rem] p-2 md:p-6 border border-slate-200 shadow-xl overflow-hidden">
+            {/* Map Container - Responsive aspect ratio */}
+            <div className="relative w-full aspect-[4/3] md:aspect-[21/9] rounded-2xl md:rounded-[2.5rem] overflow-hidden bg-slate-100">
+              {/* Plain Gray Background World Map Image */}
+              <div 
+                className="absolute inset-0 w-full h-full bg-cover bg-center opacity-40 mix-blend-multiply"
+                style={{ 
+                  backgroundImage: `url('Images/GlobalMapImage.avif')`,
+                  filter: 'grayscale(100%) brightness(1.1)'
+                }}
+              ></div>
+
+              {/* Interactive Markers */}
+              {globalPresence.map((loc, idx) => (
+                <div 
+                  key={idx} 
+                  className="absolute cursor-pointer transition-all duration-300 z-10"
+                  style={{ left: loc.x, top: loc.y, transform: 'translate(-50%, -50%)' }}
+                  onMouseEnter={() => setHoveredLocation(loc.country)}
+                  onMouseLeave={() => setHoveredLocation(null)}
+                  onClick={() => setHoveredLocation(hoveredLocation === loc.country ? null : loc.country)}
+                >
+                  <div className="relative flex items-center justify-center">
+                    <div className="absolute w-8 h-8 md:w-12 md:h-12 bg-blue-600/20 rounded-full animate-ping"></div>
+                    <div className={`w-3 h-3 md:w-4 md:h-4 rounded-full border-2 md:border-4 border-white shadow-xl transition-all duration-300 ${hoveredLocation === loc.country ? 'bg-blue-600 scale-125 md:scale-150' : 'bg-slate-400'}`}></div>
+
+                    {/* Tooltip */}
+                    <div className={`absolute bottom-full mb-3 left-1/2 -translate-x-1/2 whitespace-nowrap transition-all duration-300 pointer-events-none z-20 ${hoveredLocation === loc.country ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-2 scale-90'}`}>
+                      <div className="bg-white border border-slate-200 rounded-xl md:rounded-2xl p-3 md:p-4 shadow-2xl flex items-center">
+                        <div className="bg-blue-600 p-1.5 md:p-2 rounded-lg md:rounded-xl mr-2 md:mr-3">
+                          <MapPin className="w-3 h-3 md:w-4 md:h-4 text-white" />
+                        </div>
+                        <div className="text-left">
+                          <div className="text-[10px] md:text-xs font-black text-slate-900 uppercase tracking-widest">{loc.country}</div>
+                          <div className="text-[8px] md:text-[10px] font-bold text-blue-500 uppercase">{loc.city}</div>
+                        </div>
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 w-2 h-2 md:w-3 md:h-3 bg-white border-r border-b border-slate-200 rotate-45 -mt-1 md:-mt-1.5"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Country Pill Buttons */}
+            <div className="mt-4 flex flex-wrap justify-center gap-2 relative z-10 px-2 pb-2">
+              {globalPresence.map((loc, idx) => (
+                <button 
+                  key={idx}
+                  onMouseEnter={() => setHoveredLocation(loc.country)}
+                  onMouseLeave={() => setHoveredLocation(null)}
+                  onClick={() => setHoveredLocation(loc.country)}
+                  className={`px-3 md:px-5 py-1.5 md:py-2.5 rounded-full text-[8px] md:text-[10px] font-black uppercase tracking-[0.1em] md:tracking-[0.2em] transition-all duration-300 border ${hoveredLocation === loc.country ? 'bg-blue-600 border-blue-600 text-white shadow-lg' : 'bg-slate-50 border-slate-200 text-slate-400 hover:border-blue-300 hover:text-blue-600'}`}
+                >
+                  {loc.country}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+      </div>
   );
 };
 
