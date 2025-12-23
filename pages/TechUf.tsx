@@ -33,7 +33,7 @@ const TechUf: React.FC<{ addLead: (l: any) => void }> = ({ addLead }) => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           <div className="lg:col-span-2">
             <div className="rounded-[3rem] overflow-hidden shadow-2xl mb-16 border-8 border-slate-100">
-              <img src="public/images/U-flocs-UF/UF.png" alt="UF Membranes" className="w-full h-[500px] object-cover" />
+              <img src="/images/U-flocs-UF/UF.png" alt="UF Membranes" className="w-full h-[500px] object-cover" />
             </div>
 
             <div className="prose prose-lg text-slate-600 max-w-none">

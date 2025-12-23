@@ -54,7 +54,7 @@ const [isSearchOpen, setIsSearchOpen] = useState(false);
         <div className="flex justify-between h-20">
           <div className="flex items-center">
             <Link to="/" className="flex items-center group">
-              <img src="public/images/Albion_high_-_logo-removebg-preview.png" alt="Albion Ecotech logo" className='w-48 h-16'/>
+              <img src="/images/Albion_high_-_logo-removebg-preview.png" alt="Albion Ecotech logo" className='w-48 h-16'/>
             </Link>
           </div>
 
@@ -88,17 +88,17 @@ const [isSearchOpen, setIsSearchOpen] = useState(false);
                   <div>
                     <h3 className="text-xs font-bold text-blue-600 uppercase tracking-wider mb-4 border-b pb-2">Effluent Treatment</h3>
                     <div className="space-y-3 text-sm">
-                      <Link to="/recycling/daf" className="block hover:text-blue-600 transition-colors font-medium">Dissolved Air Flotation (DAF)</Link>
+                      <Link to="/technology/a-pro-daf" className="block hover:text-blue-600 transition-colors font-medium">Dissolved Air Flotation (DAF)</Link>
                       <Link to="/recycling/afm" className="block hover:text-blue-600 transition-colors font-medium">Activated Filtration Media (AFM)</Link>
-                      <Link to="/recycling/cera-flocs" className="block hover:text-blue-600 transition-colors font-medium">Cera Flocs</Link>
+                      <Link to="/technology/c-flocs" className="block hover:text-blue-600 transition-colors font-medium">Cera Flocs</Link>
                       <Link to="/recycling/mvr" className="block hover:text-blue-600 transition-colors font-medium">Mechanical Vapor Recompressor</Link>
                     </div>
                   </div>
                   <div>
                     <h3 className="text-xs font-bold text-blue-600 uppercase tracking-wider mb-4 border-b pb-2">Sewage Treatment</h3>
                     <div className="space-y-3 text-sm">
-                      <Link to="/recycling/mbr" className="block hover:text-blue-600 transition-colors font-medium">Membrane Bio Reactor (MBR)</Link>
-                      <Link to="/recycling/ambbr" className="block hover:text-blue-600 transition-colors font-medium">Advanced Moving Bed (AMBBR)</Link>
+                      <Link to="/technology/x-flocs" className="block hover:text-blue-600 transition-colors font-medium">Membrane Bio Reactor (MBR)</Link>
+                      <Link to="/technology/m-flocs" className="block hover:text-blue-600 transition-colors font-medium">Advanced Moving Bed (AMBBR)</Link>
                       <Link to="/recycling/mbbr" className="block hover:text-blue-600 transition-colors font-medium">Moving Bed Bioreactor (MBBR)</Link>
                       <Link to="/recycling/sbr" className="block hover:text-blue-600 transition-colors font-medium">Sequencing Batch Reactor (SBR)</Link>
                     </div>
@@ -171,7 +171,7 @@ const [isSearchOpen, setIsSearchOpen] = useState(false);
           <Link to="/technology/m-flocs" onClick={() => setIsOpen(false)} className="block px-6 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50">AMBBR System</Link>
           <Link to="/technology/x-flocs" onClick={() => setIsOpen(false)} className="block px-6 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50">MBR System</Link>
           <div className="px-3 py-2 text-xs font-bold text-blue-600 uppercase tracking-widest">Water Recycling</div>
-          <Link to="/recycling/daf" onClick={() => setIsOpen(false)} className="block px-6 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50">Effluent: DAF</Link>
+          <Link to="/technology/a-pro-daf" onClick={() => setIsOpen(false)} className="block px-6 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50">Effluent: DAF</Link>
           <Link to="/recycling/mbr" onClick={() => setIsOpen(false)} className="block px-6 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50">Sewage: MBR</Link>
           <div className="px-3 py-2 text-xs font-bold text-blue-600 uppercase tracking-widest">Membranes</div>
           <a href={blufoxLink} target="_blank" rel="noopener noreferrer" className="block px-6 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50">Visit BluFox site</a>

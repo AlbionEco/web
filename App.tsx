@@ -5,7 +5,10 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
+import TechnologyOverview from './pages/TechnologyOverview';
 import TechnologyDetail from './pages/TechnologyDetail';
+import RecyclingOverview from './pages/RecyclingOverview';
+import RecyclingDetail from './pages/RecyclingDetail';
 import Industries from './pages/Industries';
 import Projects from './pages/Projects';
 import WhyAlbion from './pages/WhyAlbion';
@@ -17,6 +20,7 @@ import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import { Lead, Blog as BlogType } from './types';
 import { apiService } from './services/api';
+import MembraneOverview from './pages/MembraneOverview';
 
 const App: React.FC = () => {
   const [blogs, setBlogs] = useState<BlogType[]>([]);
@@ -61,7 +65,10 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Home addLead={handleAddLead} blogs={blogs} />} />
             <Route path="/about" element={<About />} />
+            <Route path="/technologies" element={<TechnologyOverview/>} />
             <Route path="/technology/:id" element={<TechnologyDetail addLead={handleAddLead} />} />
+            <Route path="/recycling" element={<RecyclingOverview/>} />
+            <Route path="/recycling/:id" element={<RecyclingDetail addLead={handleAddLead} />} />
             <Route path="/industries" element={<Industries />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/why-albion" element={<WhyAlbion />} />
@@ -69,6 +76,7 @@ const App: React.FC = () => {
             <Route path="/blog/:id" element={<BlogDetail />} />
             <Route path="/contact" element={<Contact addLead={handleAddLead} />} />
             <Route path="/downloads" element={<Downloads addLead={handleAddLead} />} />
+            <Route path="/membranes" element={<MembraneOverview />} />
             
             <Route 
               path="/control-center" 

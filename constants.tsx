@@ -27,7 +27,7 @@ export const TECHNOLOGIES: Technology[] = [
       'Pulp & Paper Processing',
       'Pre-treatment for RO Systems'
     ],
-    image: 'public/images/A-pro-DAF/DAF.png'
+    image: '/images/A-pro-DAF/DAF.png'
   },
   {
     id: 'm-flocs',
@@ -47,7 +47,7 @@ export const TECHNOLOGIES: Technology[] = [
       'BOD/COD reduction',
       'System Capacity Upgrades'
     ],
-    image: 'public/images/M-flocs-AMBBR/AMBBR.png'
+    image: '/images/M-flocs-AMBBR/AMBBR.png'
   },
   {
     id: 'x-flocs',
@@ -67,7 +67,7 @@ export const TECHNOLOGIES: Technology[] = [
       'Industrial Wastewater Recycling',
       'Remote Mining/Construction Camps'
     ],
-    image: 'public/images/X-flocs-MBR/MBR.png'
+    image: '/images/X-flocs-MBR/MBR.png'
   },
   {
     id: 'c-flocs',
@@ -87,7 +87,7 @@ export const TECHNOLOGIES: Technology[] = [
       'High Temperature Effluents',
       'Acid/Alkali Wastewater recovery'
     ],
-    image: 'public/images/C-flocs-Ceramic/ceramic.png'
+    image: '/images/C-flocs-Ceramic/ceramic.png'
   },
   {
     id: 'u-flocs',
@@ -107,7 +107,7 @@ export const TECHNOLOGIES: Technology[] = [
       'Secondary Effluent Polishing',
       'Boiler Feedwater Pre-treatment'
     ],
-    image: 'public/images/U-flocs-UF/UF.png'
+    image: '/images/U-flocs-UF/UF.png'
   },
   {
     id: 'afm',
@@ -127,7 +127,7 @@ export const TECHNOLOGIES: Technology[] = [
       'Cooling Tower Filtration',
       'Pre-treatment for Ion Exchange'
     ],
-    image: 'public/images/AFM/Activated Filtration Media AFM.png'
+    image: '/images/AFM/Activated Filtration Media AFM.png'
   },
   {
     id: 'mvr',
@@ -147,7 +147,7 @@ export const TECHNOLOGIES: Technology[] = [
       'High TDS Effluent Treatment',
       'Concentration of Process Liquids'
     ],
-    image: 'public/images/MVR/MVR-Mechanical Vapor Recompressor.jpg'
+    image: '/images/MVR/MVR-Mechanical Vapor Recompressor.jpg'
   },
   {
     id: 'mbbr',
@@ -167,7 +167,7 @@ export const TECHNOLOGIES: Technology[] = [
       'Textile Biological Stage',
       'Upgrade of existing ETPs'
     ],
-    image: 'public/images/MBBR/MBBR-Moving Bed Bioreactor System.png'
+    image: '/images/MBBR/MBBR-Moving Bed Bioreactor System.png'
   },
   {
     id: 'sbr',
@@ -187,7 +187,7 @@ export const TECHNOLOGIES: Technology[] = [
       'Hotel & Resort Sewage',
       'Decentralized Water Reuse'
     ],
-    image: 'public/images/SBR/Sequencing Batch Reactor (SBR).png'
+    image: '/images/SBR/Sequencing Batch Reactor (SBR).png'
   }
 ];
 
