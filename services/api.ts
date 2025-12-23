@@ -1,7 +1,7 @@
 
 import { Lead, Blog } from '../types';
 
-const API_BASE_URL = '/api';
+const API_BASE_URL = 'https://web-0tqb.onrender.com/api';
 
 export const apiService = {
   // LEADS API
