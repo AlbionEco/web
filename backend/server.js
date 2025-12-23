@@ -33,109 +33,94 @@ const BlogSchema = new mongoose.Schema({
   date: { type: String, default: () => new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) }
 });
 
-// Avoid "OverwriteModelError" in serverless environments by checking if the model already exists
+// Avoid re-compilation of models in serverless
 const Lead = mongoose.models.Lead || mongoose.model('Lead', LeadSchema);
 const Blog = mongoose.models.Blog || mongoose.model('Blog', BlogSchema);
 
-// Connection helper for Serverless - ensures we only connect once and wait for it
-let cachedDb = null;
+// Connection state for serverless
+let isConnected = false;
 
-const connectToDatabase = async () => {
-  if (cachedDb && mongoose.connection.readyState === 1) {
-    return cachedDb;
-  }
+const connectDB = async () => {
+  if (isConnected) return;
 
   const uri = process.env.MONGODB_URI;
   if (!uri) {
-    throw new Error('Please define the MONGODB_URI environment variable');
+    console.error('MONGODB_URI missing');
+    return;
   }
 
-  // If already connecting, wait for it
-  if (mongoose.connection.readyState === 2) {
-    return mongoose.connection.asPromise();
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    isConnected = true;
+    console.log('✓ MongoDB Connected');
+  } catch (err) {
+    console.error('MongoDB connection error:', err);
   }
-
-  cachedDb = await mongoose.connect(uri, {
-    bufferCommands: false,
-  });
-  
-  return cachedDb;
 };
 
 // API ROUTES
 app.post('/api/leads', async (req, res) => {
   try {
-    await connectToDatabase();
+    await connectDB();
     const newLead = new Lead(req.body);
     const savedLead = await newLead.save();
     res.status(201).json(savedLead);
   } catch (err) {
-    console.error('Lead Post Error:', err);
-    res.status(500).json({ error: err.message });
+    res.status(400).json({ error: err.message });
   }
 });
 
 app.get('/api/leads', async (req, res) => {
   try {
-    await connectToDatabase();
+    await connectDB();
     const leads = await Lead.find().sort({ timestamp: -1 });
     res.json(leads);
   } catch (err) {
-    console.error('Lead Fetch Error:', err);
     res.status(500).json({ error: err.message });
   }
 });
 
 app.get('/api/blogs', async (req, res) => {
   try {
-    await connectToDatabase();
+    await connectDB();
     const blogs = await Blog.find().sort({ _id: -1 });
     res.json(blogs);
   } catch (err) {
-    console.error('Blog Fetch Error:', err);
     res.status(500).json({ error: err.message });
   }
 });
 
 app.get('/api/blogs/:id', async (req, res) => {
   try {
-    await connectToDatabase();
+    await connectDB();
     const blog = await Blog.findById(req.params.id);
     if (!blog) return res.status(404).json({ message: 'Article not found' });
     res.json(blog);
   } catch (err) {
-    console.error('Blog Detail Error:', err);
     res.status(500).json({ error: err.message });
   }
 });
 
 app.post('/api/blogs', async (req, res) => {
   try {
-    await connectToDatabase();
+    await connectDB();
     const newBlog = new Blog(req.body);
     const savedBlog = await newBlog.save();
     res.status(201).json(savedBlog);
   } catch (err) {
-    console.error('Blog Save Error:', err);
-    res.status(500).json({ error: err.message });
+    res.status(400).json({ error: err.message });
   }
 });
 
-// Health check route
-app.get('/api/health', (req, res) => res.status(200).json({ status: 'OK' }));
+app.get('/api/health', (req, res) => res.json({ status: 'UP' }));
 
-// Global Error Handler
-app.use((err, req, res, next) => {
-  console.error('Unhandled Server Error:', err);
-  res.status(500).json({ error: 'Internal Server Error', details: err.message });
-});
-
-// SERVER INITIALIZATION (Local only)
+// For local development
 if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
-  connectToDatabase().then(() => {
-    app.listen(PORT, () => console.log(`✓ Local server running on http://localhost:${PORT}`));
-  }).catch(err => {
-    console.error('Failed to start local server:', err);
+  connectDB().then(() => {
+    app.listen(PORT, () => console.log(`✓ Local server: http://localhost:${PORT}`));
   });
 }
 

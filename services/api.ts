@@ -1,7 +1,6 @@
 
 import { Lead, Blog } from '../types';
 
-// Use relative URL for Vercel rewrites to work correctly
 const API_BASE_URL = '/api';
 
 export const apiService = {
@@ -9,10 +8,7 @@ export const apiService = {
   async getLeads(): Promise<Lead[]> {
     try {
       const response = await fetch(`${API_BASE_URL}/leads`);
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
-      }
+      if (!response.ok) throw new Error('Failed to fetch leads');
       const data = await response.json();
       return data.map((lead: any) => ({
         ...lead,
@@ -31,15 +27,11 @@ export const apiService = {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(lead),
       });
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
-      }
+      if (!response.ok) throw new Error('Failed to save lead');
       const data = await response.json();
       return { ...data, id: data._id };
     } catch (error) {
       console.error('API Error (saveLead):', error);
-      // Fallback for offline or error states
       return { 
         ...lead, 
         id: Math.random().toString(36).substr(2, 9), 
@@ -52,10 +44,7 @@ export const apiService = {
   async getBlogs(): Promise<Blog[]> {
     try {
       const response = await fetch(`${API_BASE_URL}/blogs`);
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
-      }
+      if (!response.ok) throw new Error('Failed to fetch blogs');
       const data = await response.json();
       return data.map((blog: any) => ({
         ...blog,
@@ -70,10 +59,7 @@ export const apiService = {
   async getBlogById(id: string): Promise<Blog | null> {
     try {
       const response = await fetch(`${API_BASE_URL}/blogs/${id}`);
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
-      }
+      if (!response.ok) throw new Error('Blog not found');
       const data = await response.json();
       return { ...data, id: data._id };
     } catch (error) {
@@ -89,10 +75,7 @@ export const apiService = {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(blog),
       });
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
-      }
+      if (!response.ok) throw new Error('Failed to save blog');
       const data = await response.json();
       return { ...data, id: data._id };
     } catch (error) {
@@ -101,4 +84,3 @@ export const apiService = {
     }
   }
 };
-  

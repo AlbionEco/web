@@ -77,7 +77,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ leads, blogs, onAddBlog
     <div className="min-h-screen bg-slate-50 flex">
       <aside className="w-72 bg-slate-900 text-slate-300 flex flex-col fixed h-full z-20 shadow-2xl">
         <div className="p-8 border-b border-slate-800 text-center">
-            <img src="/Images/Albion_high_-_logo-removebg-preview.png" alt="Logo" className="w-40 mx-auto mb-2 invert brightness-0" />
+            <img src="/images/Albion_high_-_logo-removebg-preview.png" alt="Logo" className="w-40 mx-auto mb-2 invert brightness-0" />
             <div className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.3em]">Control Center</div>
         </div>
         
