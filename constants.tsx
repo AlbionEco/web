@@ -213,11 +213,11 @@ export const WATER_RECYCLING_TREATMENTS = {
 };
 
 export const MEMBRANE_TYPES = [
-  'MBR Hollow fiber Membranes',
-  'Ultra Filtration Membrane (UF)',
-  'Sumitomo Poreflon Membrane',
-  'Flatsheet Ceramic Membrane',
-  'Reverse Osmosis Membrane'
+  { name: "MBR Hollow Fiber Membranes", link: "https://blufoxmembranes.com/bf-series-hollow-fiber-mbr-membrane/" },
+  { name: "Ultra Filtration Membrane (UF)", link: "https://blufoxmembranes.com/uf-membrane/" },
+  { name: "Sumitomo Poreflon Membrane", link: "https://blufoxmembranes.com/submerge-type-poreflon-module/" },
+  { name: "Flatsheet Ceramic Membrane", link: "https://blufoxmembranes.com/ceramic-flat-sheet-membranes" },
+  { name: "Reverse Osmosis Membrane", link: "https://blufoxmembranes.com/reverse-osmosis-ro-membrane-blufox/" }
 ];
 
 export const INDUSTRIES = [
@@ -227,4 +227,116 @@ export const INDUSTRIES = [
   'Automobile',
   'Chemical Processing',
   'Municipal & Residential'
+];
+
+
+export const PRODUCTS = [
+  {
+    title: "Air Diffuser",
+    image: "/images/products/air-diffuser.jpg",
+    points: [
+      "Tubular Diffuser: 65×620mm, 65×1000mm, 65×2200mm, 90×1000mm",
+      "Disc Diffuser: 9\" Dia, 12\" Dia",
+      "Retrievable Assembly for Diffusers"
+    ]
+  },
+  {
+    title: "Sludge Decanter Unit",
+    image: "/images/products/sludge-decanter.jpg",
+    points: [
+      "Used to separate solids from liquid continuously",
+      "Available in range of 1–25 m³/h"
+    ]
+  },
+  {
+    title: "Bacteria",
+    image: "/images/products/bacteria.jpg",
+    points: [
+      "STP Bacteria",
+      "ETP Bacteria",
+      "Nutrient Removal Bacteria",
+      "Textile Bacteria",
+      "Oil & Grease Removal Bacteria"
+    ]
+  },
+  {
+    title: "Chemicals",
+    image: "/images/products/chemicals.jpg",
+    points: [
+      "Alum",
+      "Poly Aluminium Chloride",
+      "Poly Electrolyte",
+      "Caustic Soda",
+      "Ferrous Sulphate"
+    ]
+  },
+  {
+    title: "Filter Press",
+    image: "/images/products/filter-press.jpg",
+    points: [
+      "Sludge dewatering system",
+      "Sizes: 24×24, 36×36, 48×48"
+    ]
+  },
+  {
+    title: "Drum & Parabolic Screen",
+    image: "/images/products/screen.jpg",
+    points: [
+      "Separates floatable solids at preliminary stage",
+      "Custom sizes available"
+    ]
+  },
+  {
+    title: "MBR Membrane",
+    image: "/images/products/mbr.jpg",
+    points: [
+      "Hollow fiber: 10, 20, 30 m²",
+      "Flat sheet membrane"
+    ]
+  },
+  {
+    title: "UF Membrane",
+    image: "/images/products/uf.jpg",
+    points: [
+      "High pressure resistance",
+      "Excellent cleaning & recovery",
+      "Chemical & temperature tolerant"
+    ]
+  },
+  {
+    title: "MBBR Media",
+    image: "/images/products/mbbr.jpg",
+    points: [
+      "High surface area",
+      "Highest removal efficiency",
+      "Virgin PE material"
+    ]
+  },
+  {
+    title: "Ultraviolet Systems",
+    image: "/images/products/uv.jpg",
+    points: [
+      "99.99% kill rate",
+      "Capacity: 1–100 m³/h",
+      "Advanced FEP tubing"
+    ]
+  },
+  {
+    title: "Air Blower",
+    image: "/images/products/blower.jpg",
+    points: [
+      "Side channel & roots blowers",
+      "Capacity: 10–3000 CMH",
+      "Brands: SPM, USHA"
+    ]
+  },
+  {
+    title: "Pumps",
+    image: "/images/products/pumps.jpg",
+    points: [
+      "Monoblock, multistage, centrifugal, submersible",
+      "Capacity: 250–10000 LPH",
+      "Head: 5–35 meters"
+    ]
+  }
 ];

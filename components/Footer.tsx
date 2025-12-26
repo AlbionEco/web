@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Droplets, Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Lock } from 'lucide-react';
+import { Droplets, Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Lock, ExternalLink } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -23,14 +23,14 @@ const Footer: React.FC = () => {
               Engineered-for-performance solutions in wastewater treatment, industrial water recycling, and environmental engineering. Helping industries achieve zero liquid discharge (ZLD) goals.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="bg-slate-800 p-2 rounded-full hover:bg-blue-600 transition-colors text-white">
+              <a href="https://www.linkedin.com/company/water-recycling-company/" className="bg-slate-800 p-2 rounded-full hover:bg-blue-600 transition-colors text-white">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="#" className="bg-slate-800 p-2 rounded-full hover:bg-blue-600 transition-colors text-white">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="bg-slate-800 p-2 rounded-full hover:bg-blue-600 transition-colors text-white">
+              <a href="https://www.facebook.com/waterrecyclingcompany/" className="bg-slate-800 p-2 rounded-full hover:bg-blue-600 transition-colors text-white">
                 <Facebook className="w-5 h-5" />
+              </a>
+              <a href="https://share.google/oi9vQeP5tC3mEPvNj/" className="bg-slate-800 p-2 rounded-full hover:bg-blue-600 transition-colors text-white">
+                <ExternalLink className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -65,11 +65,11 @@ const Footer: React.FC = () => {
             <ul className="space-y-4">
               <li className="flex items-start">
                 <MapPin className="w-5 h-5 mr-3 text-blue-500 shrink-0 mt-1" />
-                <span>Corp Office: Sector 63, Noida, Uttar Pradesh, India - 201301</span>
+                <span>1908, The Junomoneta Tower, Beside Rajhans Multiplex, Adajan Hazira Main Road, Pal, Surat 395009 Gujarat, India</span>
               </li>
               <li className="flex items-center">
                 <Phone className="w-5 h-5 mr-3 text-blue-500 shrink-0" />
-                <span>+91 99999 XXXXX</span>
+                <span>+91 99245 22279 </span>
               </li>
               <li className="flex items-center">
                 <Mail className="w-5 h-5 mr-3 text-blue-500 shrink-0" />

@@ -54,8 +54,7 @@ const Contact: React.FC<ContactProps> = ({ addLead }) => {
                   <div>
                     <h4 className="font-bold text-slate-900">Headquarters</h4>
                     <p className="text-slate-600 text-sm mt-1">
-                      Plot No. 42, Sector 63, Noida,<br />
-                      Uttar Pradesh, India - 201301
+                      1908, The Junomoneta Tower, Beside Rajhans Multiplex, Adajan Hazira Main Road, Pal, Surat 395009 Gujarat, India
                     </p>
                   </div>
                 </div>
@@ -67,8 +66,8 @@ const Contact: React.FC<ContactProps> = ({ addLead }) => {
                   <div>
                     <h4 className="font-bold text-slate-900">Direct Contact</h4>
                     <p className="text-slate-600 text-sm mt-1">
-                      Main: +91 99999 XXXXX<br />
-                      Sales: +91 88888 XXXXX
+                      Main: +91 99245 22279<br />
+                      Sales: +91 90990 22279
                     </p>
                   </div>
                 </div>
@@ -93,7 +92,7 @@ const Contact: React.FC<ContactProps> = ({ addLead }) => {
                   <div>
                     <h4 className="font-bold text-slate-900">Business Hours</h4>
                     <p className="text-slate-600 text-sm mt-1">
-                      Mon - Sat: 09:30 AM - 06:30 PM<br />
+                      Mon - Sat: 10:00 AM - 06:00 PM<br />
                       Sunday: Closed
                     </p>
                   </div>

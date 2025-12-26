@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ExternalLink, Shield, Zap, Droplets, Target, ArrowUpRight } from 'lucide-react';
+import { ExternalLink, Target, ArrowUpRight } from 'lucide-react';
 import { MEMBRANE_TYPES } from '../constants';
 
 const MembraneOverview: React.FC = () => {
@@ -49,10 +49,10 @@ const MembraneOverview: React.FC = () => {
           </div>
 
           <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {MEMBRANE_TYPES.map((name, i) => (
+            {MEMBRANE_TYPES.map((item, i) => (
               <a 
                 key={i} 
-                href={blufoxLink} 
+                href={item.link}
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 hover:shadow-2xl hover:border-blue-600 transition-all group relative overflow-hidden"
@@ -60,7 +60,7 @@ const MembraneOverview: React.FC = () => {
                 <div className="absolute -bottom-4 -right-4 bg-blue-50 w-24 h-24 rounded-full group-hover:scale-[3] transition-transform duration-700 opacity-50"></div>
                 <div className="relative z-10 flex justify-between items-start">
                   <div>
-                    <h4 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2">{name}</h4>
+                    <h4 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2">{item.name}</h4>
                     <p className="text-sm text-slate-500 font-bold uppercase tracking-tighter">View Specs on BluFox site</p>
                   </div>
                   <ArrowUpRight className="w-6 h-6 text-slate-300 group-hover:text-blue-600" />
@@ -68,7 +68,6 @@ const MembraneOverview: React.FC = () => {
               </a>
             ))}
           </div>
-
         </div>
       </section>
 

@@ -21,6 +21,16 @@ import AdminDashboard from './pages/AdminDashboard';
 import { Lead, Blog as BlogType } from './types';
 import { apiService } from './services/api';
 import MembraneOverview from './pages/MembraneOverview';
+import TechDaf from './pages/TechDaf';
+import TechAmbbr from './pages/TechAmbbr';
+import TechMbr from './pages/TechMbr';
+import TechCeraFlocs from './pages/TechCeraFlocs';
+import TechUf from './pages/TechUf';
+import TechAfm from './pages/TechAfm';
+import TechMvr from './pages/TechMvr';
+import TechMbbr from './pages/TechMbbr';
+import TechSbr from './pages/TechSbr';
+import EtpStpproducts from './pages/EtpStpproducts'
 
 const App: React.FC = () => {
   const [blogs, setBlogs] = useState<BlogType[]>([]);
@@ -66,8 +76,17 @@ const App: React.FC = () => {
             <Route path="/" element={<Home addLead={handleAddLead} blogs={blogs} />} />
             <Route path="/about" element={<About />} />
             <Route path="/technologies" element={<TechnologyOverview/>} />
-            <Route path="/technology/:id" element={<TechnologyDetail addLead={handleAddLead} />} />
+            <Route path="/technology/a-pro-daf" element={<TechDaf addLead={handleAddLead} />} />
+            <Route path="/technology/m-flocs" element={<TechAmbbr addLead={handleAddLead} />} />
+            <Route path="/technology/x-flocs" element={<TechMbr addLead={handleAddLead} />} />
+            <Route path="/technology/c-flocs" element={<TechCeraFlocs addLead={handleAddLead} />} />
+            <Route path="/technology/u-flocs" element={<TechUf addLead={handleAddLead} />} />
+             <Route path="/technology/:id" element={<TechnologyDetail addLead={handleAddLead} />} />
             <Route path="/recycling" element={<RecyclingOverview/>} />
+            <Route path="/recycling/afm" element={<TechAfm addLead={handleAddLead} />} />
+            <Route path="/recycling/mvr" element={<TechMvr addLead={handleAddLead} />} />
+            <Route path="/recycling/mbbr" element={<TechMbbr addLead={handleAddLead} />} />
+            <Route path="/recycling/sbr" element={<TechSbr addLead={handleAddLead} />} />
             <Route path="/recycling/:id" element={<RecyclingDetail addLead={handleAddLead} />} />
             <Route path="/industries" element={<Industries />} />
             <Route path="/projects" element={<Projects />} />
@@ -77,7 +96,7 @@ const App: React.FC = () => {
             <Route path="/contact" element={<Contact addLead={handleAddLead} />} />
             <Route path="/downloads" element={<Downloads addLead={handleAddLead} />} />
             <Route path="/membranes" element={<MembraneOverview />} />
-            
+             <Route path="/etpstpproducts" element={<EtpStpproducts addLead={handleAddLead} />} />
             <Route 
               path="/control-center" 
               element={

@@ -54,7 +54,7 @@ const [isSearchOpen, setIsSearchOpen] = useState(false);
         <div className="flex justify-between h-20">
           <div className="flex items-center">
             <Link to="/" className="flex items-center group">
-              <img src="/images/Albion_high_-_logo-removebg-preview.png" alt="Albion Ecotech logo" className='w-48 h-16'/>
+              <img src="/images/Albion_high_-_logo-removebg-preview.png" alt="Albion Ecotech logo" className='w-45 h-auto'/>
             </Link>
           </div>
 
@@ -64,9 +64,10 @@ const [isSearchOpen, setIsSearchOpen] = useState(false);
             
             {/* Technologies Dropdown */}
             <div className="relative group" onMouseEnter={() => setIsTechOpen(true)} onMouseLeave={() => setIsTechOpen(false)}>
+              <Link to="/technologies">
               <button className="flex items-center text-slate-600 hover:text-blue-900 font-medium transition-colors h-20 text-sm lg:text-base">
                 Technologies <ChevronDown className="ml-1 w-4 h-4" />
-              </button>
+              </button></Link>
               <div className={`absolute left-0 mt-0 w-64 bg-white shadow-xl rounded-b-lg border border-slate-100 overflow-hidden transition-all duration-300 z-50 ${isTechOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}>
                 <Link to="/technologies" className="block px-4 py-3 bg-slate-50 text-xs font-bold text-blue-900 uppercase tracking-widest border-b border-slate-100 hover:bg-blue-50">Overview</Link>
                 <Link to="/technology/a-pro-daf" className="block px-4 py-3 text-sm text-slate-700 hover:bg-slate-50 border-b border-slate-50">A-PRO DAF System</Link>
@@ -79,9 +80,11 @@ const [isSearchOpen, setIsSearchOpen] = useState(false);
 
             {/* Water Recycling Mega Menu */}
             <div className="relative group" onMouseEnter={() => setIsRecycleOpen(true)} onMouseLeave={() => setIsRecycleOpen(false)}>
+              <Link to="/recycling">
               <button className="flex items-center text-slate-600 hover:text-blue-900 font-medium transition-colors h-20 text-sm lg:text-base whitespace-nowrap">
                 Water Recycling <ChevronDown className="ml-1 w-4 h-4" />
               </button>
+              </Link>
               <div className={`absolute left-[-200px] mt-0 w-[600px] bg-white shadow-2xl rounded-b-xl border border-slate-100 overflow-hidden transition-all duration-300 z-50 ${isRecycleOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}>
                 <Link to="/recycling" className="block px-6 py-4 bg-blue-900 text-sm font-bold text-white uppercase tracking-widest hover:bg-blue-800 flex justify-between items-center">Recycling Overview <ChevronRight className="w-4 h-4" /></Link>
                 <div className="grid grid-cols-2 p-6 gap-8">
@@ -103,22 +106,30 @@ const [isSearchOpen, setIsSearchOpen] = useState(false);
                       <Link to="/recycling/sbr" className="block hover:text-blue-600 transition-colors font-medium">Sequencing Batch Reactor (SBR)</Link>
                     </div>
                   </div>
+                  <div>
+                    <h3 className="text-xs font-bold text-blue-600 uppercase tracking-wider mb-4 border-b pb-2"> Products</h3>
+                    <div className="space-y-3 text-sm">
+                      <Link to="/etpstpproducts" className="block hover:text-blue-600 transition-colors font-medium">ETP/STP Products</Link>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Membranes Dropdown */}
             <div className="relative group" onMouseEnter={() => setIsMembraneOpen(true)} onMouseLeave={() => setIsMembraneOpen(false)}>
+              <Link to="/membranes">
               <button className="flex items-center text-slate-600 hover:text-blue-900 font-medium transition-colors h-20 text-sm lg:text-base">
                 Membranes <ChevronDown className="ml-1 w-4 h-4" />
               </button>
+              </Link>
               <div className={`absolute left-0 mt-0 w-64 bg-white shadow-xl rounded-b-lg border border-slate-100 overflow-hidden transition-all duration-300 z-50 ${isMembraneOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}>
                 <Link to="/membranes" className="block px-4 py-3 bg-blue-50 text-xs font-bold text-blue-700 uppercase tracking-widest border-b border-slate-100">BluFox Partnership</Link>
-                <a href={blufoxLink} target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-slate-700 hover:bg-slate-50 border-b border-slate-50">MBR Hollow fiber Membranes</a>
-                <a href={blufoxLink} target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-slate-700 hover:bg-slate-50 border-b border-slate-50">Ultra Filtration Membrane (UF)</a>
-                <a href={blufoxLink} target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-slate-700 hover:bg-slate-50 border-b border-slate-50">Sumitomo Poreflon Membrane</a>
-                <a href={blufoxLink} target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-slate-700 hover:bg-slate-50 border-b border-slate-50">Flatsheet Ceramic Membrane</a>
-                <a href={blufoxLink} target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-slate-700 hover:bg-slate-50">Reverse Osmosis Membrane</a>
+                <a href="https://blufoxmembranes.com/bf-series-hollow-fiber-mbr-membrane/" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-slate-700 hover:bg-slate-50 border-b border-slate-50">MBR Hollow fiber Membranes</a>
+                <a href="https://blufoxmembranes.com/uf-membrane/" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-slate-700 hover:bg-slate-50 border-b border-slate-50">Ultra Filtration Membrane (UF)</a>
+                <a href="https://blufoxmembranes.com/submerge-type-poreflon-module/" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-slate-700 hover:bg-slate-50 border-b border-slate-50">Sumitomo Poreflon Membrane</a>
+                <a href="https://blufoxmembranes.com/ceramic-flat-sheet-membranes" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-slate-700 hover:bg-slate-50 border-b border-slate-50">Flatsheet Ceramic Membrane</a>
+                <a href="https://blufoxmembranes.com/reverse-osmosis-ro-membrane-blufox/" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-slate-700 hover:bg-slate-50">Reverse Osmosis Membrane</a>
               </div>
             </div>
 
